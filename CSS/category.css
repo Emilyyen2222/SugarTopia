@@ -2,6 +2,9 @@ html {
     font-size: clamp(16px, 2vw, 3rem);
 }
 
+body {
+    font-family: poppins;
+}
 .dessert-shops h1{
     font-size: 0.7rem;
 }

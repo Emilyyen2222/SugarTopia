@@ -12,7 +12,9 @@ body {
   margin: 0;
   padding: 0;
 } */
-
+body {
+  font-family: poppins;
+}
 .swiper {
   width: 40vw;
   height: 70vh;

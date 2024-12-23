@@ -31,7 +31,7 @@ body {
 }
 
 .subtitle {
-    color: #666;
+    color: #3A2513;
     text-align: center;
     margin-bottom: 30px;
 }
@@ -75,7 +75,7 @@ body {
     display: flex;
     align-items: center;
     gap: 8px;
-    color: #666;
+    color: #3A2513;
 }
 
 .forgot-password {
@@ -112,7 +112,7 @@ body {
 }
 
 .social-login p {
-    color: #666;
+    color: #3A2513;
     margin-bottom: 15px;
 }
 
@@ -153,14 +153,14 @@ body {
 }
 
 .apple i {
-    color: #000;
+    color: #3A2513;
 }
 
 /* 註冊連結 */
 .signup-link {
     text-align: center;
     margin-top: 20px;
-    color: #666;
+    color: #3A2513;
 }
 
 .signup-link a {
