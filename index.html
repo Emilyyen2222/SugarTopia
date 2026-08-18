@@ -15,6 +15,9 @@
     <script src="Js/button_up.js" defer></script>
     <!-- <script src="Js/slider.js" defer></script> -->
     <script src="Js/hamburger.js" defer></script>
+    <script src="Js/site-data.js" defer></script>
+    <script src="Js/site-enhancements.js" defer></script>
+    <script src="Js/gemini-chat.js" defer></script>
      <!-- <script src="Js/hamburger2.js"></script> -->
     <script src="Js/swiper-bundle.js"></script>
     <link rel="stylesheet" href="CSS/hamburger.css">
@@ -38,10 +41,10 @@
                     </button>
                 </div>
                 <ul>
-                        <li><a href="index.html">cinnamon rolls</a></li>
-                        <li><a href="index.html">cheese cakes</a></li>
-                        <li><a href="index.html">ice creams</a></li>
-                        <li><a href="index.html">cafes</a></li>
+                        <li><a href="category.html?q=Cinnamon%20Rolls">cinnamon rolls</a></li>
+                        <li><a href="category.html?q=Cheesecakes">cheese cakes</a></li>
+                        <li><a href="category.html?q=Ice%20Creams">ice creams</a></li>
+                        <li><a href="category.html?q=Cafes">cafes</a></li>
                         <li><a href="write_review.html">write a review</a></li>
                         <li>
                             <a href="https://www.instagram.com/cupertino.keki/" class="brand-name"target="_blank">
@@ -93,7 +96,7 @@
                 <a href="https://www.instagram.com/cupertino.keki/"target="_blank"><i class="fab fa-instagram" ></i></a>
                 <a href="https://www.youtube.com/" target="_blank"><i class="fab fa-youtube"></i></a>
                 <a href="write_review.html"><i class="fa-regular fa-star"></i></a>
-                <a href="aboutus.html"><img src='./img/icon.svg' alt="Sugar.Topia Logo"></a>
+                <a href="aboutus_sugartopia.html"><img src='./img/icon.svg' alt="Sugar.Topia Logo"></a>
             </div>
         </div>
          <!-- Swiper -->
@@ -138,11 +141,39 @@
         </div> -->
     </section>
 
+<!-- AI chat ------------------------------------------------------>
+<section class="ai-chat-section">
+    <div class="ai-chat-container">
+        <div class="ai-chat-heading">
+            <span>SugarTopia AI</span>
+            <h2>Ask for a dessert recommendation</h2>
+            <p>Tell us what kind of dessert, flavor, location, or mood you want today.</p>
+        </div>
+
+        <div id="chatMessages" class="chat-messages" aria-live="polite">
+            <div class="chat-message assistant">Hi! Tell me what dessert you want today, and I will recommend a sweet spot from our SugarTopia notes.</div>
+        </div>
+
+        <form id="chatForm" class="chat-form">
+            <input
+                id="chatInput"
+                type="text"
+                placeholder="例如：我想吃抹茶甜點，有推薦嗎？"
+                autocomplete="off"
+            />
+            <button type="submit">
+                Send
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </form>
+    </div>
+</section>
+
 <!-- latest reviews ---------------------------------------------->
 <div class="latest_review_section">
     <div class="review-header">
         <h1>Latest Reviews</h1>
-        <a href="#" class="review-view-all">View All</a>
+        <a href="review.html" class="review-view-all">View All</a>
     </div>
     <div class="review-grid">
         <div class="review-card">
@@ -397,7 +428,7 @@
                 <span class="accent-text">Newsletter</span>
                 <h2>Join Our Sweet Community</h2>
                 <p>Be the first to discover new dessert spots, exclusive offers, and mouthwatering updates.</p>
-                <div class="subscribe-form">
+                <form class="subscribe-form">
                     <div class="input-wrapper">
                         <i class="far fa-envelope"></i>
                         <input type="email" placeholder="Your email address" />
@@ -406,7 +437,7 @@
                         Subscribe
                         <i class="fas fa-arrow-right"></i>
                     </button>
-                </div>
+                </form>
                 <div class="subscribe-benefits">
                     <div class="benefit-item">
                         <i class="fas fa-check-circle"></i>
@@ -463,6 +494,3 @@
 <!-- </div> -->
 </body>
 </html>
-
-
-

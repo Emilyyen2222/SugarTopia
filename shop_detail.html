@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="CSS/style.css">
     <link rel="stylesheet" href="CSS/shop_detail.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <script src="Js/site-data.js" defer></script>
+    <script src="Js/site-enhancements.js" defer></script>
 </head>
 <body>
     <!-- Header -->
@@ -17,7 +19,7 @@
                 <ul>
                     <li><a href="index.html">Home</a></li>
                     <li><a href="category.html">Categories</a></li>
-                    <li><a href="#">About</a></li>
+                    <li><a href="aboutus_sugartopia.html">About</a></li>
                 </ul>
             </nav>
 
@@ -55,7 +57,7 @@
                     <div class="hours">
                         <span class="status">Closed</span>
                         <span class="time">11:30 AM-7:30 PM</span>
-                        <a href="#" class="see-hours">See hours</a>
+                        <a href="#" class="see-hours" data-demo-message="Full opening hours can be connected later.">See hours</a>
                     </div>
                     <div class="website">cinnamonrollsstudio.com.tw</div>
                     <div class="phone">02-2250 5431</div>
@@ -72,19 +74,19 @@
 
         <!-- 操作按鈕區 -->
         <div class="action-buttons">
-            <button class="action-btn write-review">
+            <button class="action-btn write-review" onclick="location.href='write_review.html';">
                 <i class="far fa-edit"></i>
                 Write a review
             </button>
-            <button class="action-btn add-photo">
+            <button class="action-btn add-photo" data-demo-message="Photo uploads are a future backend feature.">
                 <i class="far fa-image"></i>
                 Add photo
             </button>
-            <button class="action-btn share">
+            <button class="action-btn share" data-demo-message="Share links can be added after deployment.">
                 <i class="fas fa-share"></i>
                 Share
             </button>
-            <button class="action-btn save">
+            <button class="action-btn save" data-demo-message="Saved to your demo list. Real save needs login backend.">
                 <i class="far fa-bookmark"></i>
                 Save
             </button>
@@ -422,4 +424,4 @@
 
 
 </body>
-</html> 
+</html>
