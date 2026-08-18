@@ -1,4 +1,5 @@
-const shops = window.SugarTopiaData || [];
+let shops = window.SugarTopiaData || [];
+const shopsApiUrl = "https://sugartopia-backend-673387630043.asia-east1.run.app/api/shops";
 const filterState = {
   rating: 0,
   tag: "",
@@ -60,10 +61,51 @@ function shopMatches(shop, query, location) {
   return matchesKeyword && matchesLocation && matchesRating && matchesTag && matchesFeatures;
 }
 
-function renderShopList() {
+async function loadShops() {
+  const { query, location } = getSearchParams();
+  const params = new URLSearchParams();
+
+  if (query) {
+    params.set("q", query);
+  }
+
+  if (location) {
+    params.set("location", location);
+  }
+
+  try {
+    const response = await fetch(`${shopsApiUrl}${params.toString() ? `?${params.toString()}` : ""}`);
+
+    if (!response.ok) {
+      throw new Error("Shop API request failed.");
+    }
+
+    const data = await response.json();
+    shops = Array.isArray(data.shops) ? data.shops : shops;
+  } catch (error) {
+    showSiteMessage("Using demo shop data because the backend shop API is unavailable.");
+  }
+}
+
+async function renderShopList() {
   const list = document.querySelector(".dessert-shops");
 
-  if (!list || !shops.length) {
+  if (!list) {
+    return;
+  }
+
+  list.innerHTML = `
+    <h1>Loading dessert shops...</h1>
+    <p class="result-count">Fetching shop data from SugarTopia backend.</p>
+  `;
+
+  await loadShops();
+
+  if (!shops.length) {
+    list.innerHTML = `
+      <h1>No dessert shops yet</h1>
+      <p class="result-count">Shop data is not available right now.</p>
+    `;
     return;
   }
 

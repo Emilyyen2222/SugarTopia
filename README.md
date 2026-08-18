@@ -13,7 +13,7 @@ JavaScript
 ## 目前已整理的功能
 
 1. 首頁搜尋欄可以跳到 `category.html` 並帶入搜尋條件。
-2. `category.html` 會用 `Js/site-data.js` 的本地店家資料渲染列表。
+2. `category.html` 會優先呼叫後端 `GET /api/shops` 渲染列表。
 3. 分類頁 rating / category / features 篩選可以即時過濾列表。
 4. 首頁 AI 問答區已接到 FastAPI 後端 `/api/chat`。
 5. Login / Sign Up / Write Review 表單目前是 demo，不會真的寫入資料庫，但會顯示使用者回饋。
@@ -37,13 +37,17 @@ category.html
 Js/site-data.js
 ```
 
-目前前端用的本地假資料。之後如果有資料庫或後端店家 API，可以從這裡開始替換。
+本地備用假資料。如果後端店家 API 暫時無法使用，前端會退回使用這份資料。
 
 ```text
 Js/site-enhancements.js
 ```
 
-搜尋、分類篩選、表單 demo、提示訊息等共用互動。
+搜尋、分類篩選、表單 demo、提示訊息等共用互動。分類頁會從後端取得店家資料：
+
+```text
+https://sugartopia-backend-673387630043.asia-east1.run.app/api/shops
+```
 
 ```text
 Js/gemini-chat.js
@@ -52,7 +56,7 @@ Js/gemini-chat.js
 首頁 AI 問答，會呼叫：
 
 ```text
-http://127.0.0.1:8000/api/chat
+https://sugartopia-backend-673387630043.asia-east1.run.app/api/chat
 ```
 
 ```text
@@ -95,7 +99,9 @@ index.html
 http://127.0.0.1:5500/index.html
 ```
 
-如果要測 AI 問答，後端也要同時開著：
+如果要測正式 AI 問答，現在可以直接使用 Cloud Run 線上後端。
+
+如果你想測本機後端，也可以同時開著：
 
 ```bash
 cd /Users/mike/Documents/emily_project_archive/SugarTopia_backend
@@ -129,26 +135,24 @@ vercel
 vercel --prod
 ```
 
-注意：目前 AI API 網址還是本機：
+注意：目前 AI API 網址已經是 Cloud Run 正式後端：
 
 ```javascript
 const chatApiUrl = "https://sugartopia-backend-673387630043.asia-east1.run.app/api/chat";
 ```
 
-所以前端上 Vercel 後，AI 問答要等 FastAPI 後端也部署到正式網址，才能讓其他人使用。
-
-之後後端部署完成後，要把 `Js/gemini-chat.js` 裡的網址改成正式後端網址，例如：
+分類頁店家列表也會呼叫 Cloud Run：
 
 ```javascript
-const chatApiUrl = "https://sugartopia-backend-673387630043.asia-east1.run.app/api/chat";
+const shopsApiUrl = "https://sugartopia-backend-673387630043.asia-east1.run.app/api/shops";
 ```
 
 ## 下一階段建議
 
 1. 把登入 / 註冊接到真正的會員後端。
 2. 把評論表單接到後端資料庫。
-3. 把 `Js/site-data.js` 的假資料改成後端 API。
-4. 後端部署完成後，把 AI API URL 換成正式網址。
+3. 把登入 / 註冊接到真正的會員後端。
+4. 把評論表單接到後端資料庫。
 5. 如果功能穩定後，再考慮重構成 Vue。
 
 ## 中英文切換要現在做嗎？
