@@ -132,7 +132,7 @@ vercel --prod
 注意：目前 AI API 網址還是本機：
 
 ```javascript
-const chatApiUrl = "http://127.0.0.1:8000/api/chat";
+const chatApiUrl = "https://sugartopia-backend-673387630043.asia-east1.run.app/api/chat";
 ```
 
 所以前端上 Vercel 後，AI 問答要等 FastAPI 後端也部署到正式網址，才能讓其他人使用。
@@ -140,7 +140,7 @@ const chatApiUrl = "http://127.0.0.1:8000/api/chat";
 之後後端部署完成後，要把 `Js/gemini-chat.js` 裡的網址改成正式後端網址，例如：
 
 ```javascript
-const chatApiUrl = "https://your-backend-domain.com/api/chat";
+const chatApiUrl = "https://sugartopia-backend-673387630043.asia-east1.run.app/api/chat";
 ```
 
 ## 下一階段建議

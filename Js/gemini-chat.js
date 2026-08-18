@@ -1,7 +1,7 @@
 const chatForm = document.querySelector("#chatForm");
 const chatInput = document.querySelector("#chatInput");
 const chatMessages = document.querySelector("#chatMessages");
-const chatApiUrl = "http://127.0.0.1:8000/api/chat";
+const chatApiUrl = "https://sugartopia-backend-673387630043.asia-east1.run.app/api/chat";
 
 function formatReply(value) {
   if (typeof value === "string") {
@@ -84,7 +84,7 @@ if (chatForm && chatInput && chatMessages) {
 
       loadingMessage.textContent = formatReply(data.reply || data.error) || "沒有收到回覆。";
     } catch (error) {
-      loadingMessage.textContent = "連不上後端，請確認 FastAPI 是否正在 http://127.0.0.1:8000 執行。";
+      loadingMessage.textContent = "連不上後端，請稍後再試。";
     } finally {
       chatInput.disabled = false;
       chatInput.focus();
