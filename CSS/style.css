@@ -144,6 +144,40 @@ body {
     color: #F9A726 !important;
 }
 
+.is-hidden {
+    display: none !important;
+}
+
+.auth-user {
+    color: #ffffff;
+    font-size: 0.5rem;
+    font-weight: 600;
+    margin-left: 20px;
+    margin-right: 10px;
+    white-space: nowrap;
+}
+
+.auth-logout {
+    padding: 8px 16px;
+    border: 1px solid #ffffff;
+    border-radius: 9px;
+    background: transparent;
+    color: #ffffff;
+    cursor: pointer;
+    font-size: 0.5rem;
+    font-weight: 500;
+}
+
+.auth-logout:hover {
+    background-color: #FCDC94;
+    color: #F9A726;
+}
+
+.auth-logout:disabled {
+    cursor: wait;
+    opacity: 0.6;
+}
+
 /* Logo */
 .logo-container {
     position: fixed;

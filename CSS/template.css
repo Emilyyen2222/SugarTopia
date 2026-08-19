@@ -132,6 +132,40 @@ body {
     background-color: #FCDC94;
 }
 
+.is-hidden {
+    display: none !important;
+}
+
+.auth-user {
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 600;
+    margin-left: 20px;
+    margin-right: 10px;
+    white-space: nowrap;
+}
+
+.auth-logout {
+    padding: 8px 16px;
+    border: 1px solid #ffffff;
+    border-radius: 4px;
+    background: transparent;
+    color: #ffffff;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.auth-logout:hover {
+    background-color: #FCDC94;
+    color: #F9A726;
+}
+
+.auth-logout:disabled {
+    cursor: wait;
+    opacity: 0.6;
+}
+
 /* Logo 樣式 */
 .logo-container {
     position: fixed;
@@ -719,6 +753,5 @@ footer .footer-links a:hover {
 .footer_social-icons a:hover {
     opacity: 0.7;
 }
-
 
 

@@ -24,6 +24,8 @@ function showSiteMessage(text) {
   }, 2600);
 }
 
+window.showSiteMessage = showSiteMessage;
+
 function buildStars(rating) {
   const rounded = Math.round(rating);
   return "★★★★★".slice(0, rounded) + "☆☆☆☆☆".slice(0, 5 - rounded);
@@ -242,6 +244,10 @@ function setupSearch() {
 
 function setupDemoForms() {
   document.querySelectorAll(".login-form").forEach((form) => {
+    if (form.dataset.authForm) {
+      return;
+    }
+
     form.addEventListener("submit", (event) => {
       event.preventDefault();
 

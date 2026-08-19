@@ -5,22 +5,26 @@ body {
 }
  /* 主容器樣式 */
 .login-container {
-    min-height: 100vh;
+    min-height: calc(100vh - 180px);
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     background: linear-gradient(to right, #fff, #FCDC94 50%, #F9A726 50%);
-    padding: 100px 20px;
+    padding: 96px 20px 80px;
 }
 
 /* 登入框樣式 */
 .login-box {
     background: white;
-    padding: 40px;
+    padding: 54px 40px;
     border-radius: 20px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     width: 100%;
     max-width: 450px;
+    min-height: 440px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .login-box h1 {
@@ -105,55 +109,9 @@ body {
     background-color: #e89615;
 }
 
-/* 社交登入區域 */
-.social-login {
-    margin-top: 30px;
-    text-align: center;
-}
-
-.social-login p {
-    color: #3A2513;
-    margin-bottom: 15px;
-}
-
-.social-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-}
-
-.social-btn {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    border: 1px solid #ddd;
-    background: white;
-    cursor: pointer;
-    transition: all 0.3s;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.social-btn i {
-    font-size: 20px;
-}
-
-.social-btn:hover {
-    background-color: #f5f5f5;
-    transform: translateY(-2px);
-}
-
-.google i {
-    color: #DB4437;
-}
-
-.facebook i {
-    color: #4267B2;
-}
-
-.apple i {
-    color: #3A2513;
+.login-button:disabled {
+    cursor: wait;
+    opacity: 0.65;
 }
 
 /* 註冊連結 */
@@ -256,6 +214,7 @@ footer .footer-links a:hover {
 /* 調整註冊表單的間距 */
 .login-box.signup {
     padding: 40px;
+    min-height: auto;
 }
 
 .login-box.signup .form-group {

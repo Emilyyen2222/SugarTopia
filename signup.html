@@ -9,6 +9,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <script src="Js/site-data.js" defer></script>
     <script src="Js/site-enhancements.js" defer></script>
+    <script src="Js/auth.js" defer></script>
 </head>
 <body>
     <!-- Header 與 login.html 相同 -->
@@ -45,7 +46,7 @@
             <h1>Create Account</h1>
             <p class="subtitle">Join Sugar.Topia today</p>
             
-            <form class="login-form">
+            <form class="login-form" data-auth-form="signup">
                 <div class="form-group">
                     <label for="name">Full Name</label>
                     <input type="text" id="name" placeholder="Enter your full name" required>
@@ -74,21 +75,6 @@
                 </div>
                 
                 <button type="submit" class="login-button">Sign Up</button>
-                
-                <div class="social-login">
-                    <p>Or sign up with</p>
-                    <div class="social-buttons">
-                        <button type="button" class="social-btn google" data-demo-message="Google sign up is a future backend feature.">
-                            <i class="fab fa-google"></i>
-                        </button>
-                        <button type="button" class="social-btn facebook" data-demo-message="Facebook sign up is a future backend feature.">
-                            <i class="fab fa-facebook-f"></i>
-                        </button>
-                        <button type="button" class="social-btn apple" data-demo-message="Apple sign up is a future backend feature.">
-                            <i class="fab fa-apple"></i>
-                        </button>
-                    </div>
-                </div>
                 
                 <p class="signup-link">
                     Already have an account? <a href="login.html">Log in</a>
