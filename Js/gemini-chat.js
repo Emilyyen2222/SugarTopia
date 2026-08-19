@@ -82,7 +82,7 @@ if (chatForm && chatInput && chatMessages) {
         return;
       }
 
-      loadingMessage.textContent = formatReply(data.reply || data.error) || "沒有收到回覆。";
+      loadingMessage.textContent = formatReply(data.reply) || "SugarTopia AI 目前有點忙，請稍後再試。";
     } catch (error) {
       loadingMessage.textContent = "連不上後端，請稍後再試。";
     } finally {
