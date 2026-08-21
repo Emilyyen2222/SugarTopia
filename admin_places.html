@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>SugarTopia · Google Places 測試工具</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: #fff8ef;
+      color: #3a2513;
+      padding: 32px 20px 80px;
+    }
+
+    .admin-wrap {
+      max-width: 880px;
+      margin: 0 auto;
+    }
+
+    .admin-banner {
+      background: #3a2513;
+      color: #ffe9c7;
+      font-size: 13px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      display: inline-block;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      margin: 0 0 6px;
+      font-size: 26px;
+      color: #3a2513;
+    }
+
+    .subtitle {
+      margin: 0 0 28px;
+      color: #6f5b49;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .search-row {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 28px;
+    }
+
+    .search-row input {
+      flex: 1;
+      padding: 12px 14px;
+      border: 1px solid #ead7bd;
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: 15px;
+      background: #ffffff;
+    }
+
+    .search-row input:focus {
+      outline: 2px solid #f9a726;
+      outline-offset: 1px;
+    }
+
+    .search-row button {
+      padding: 12px 22px;
+      border: 0;
+      border-radius: 8px;
+      background: #3a2513;
+      color: #ffffff;
+      font-family: inherit;
+      font-size: 15px;
+      cursor: pointer;
+    }
+
+    .search-row button:disabled {
+      opacity: 0.6;
+      cursor: default;
+    }
+
+    .status-line {
+      margin-bottom: 16px;
+      font-size: 14px;
+      color: #6f5b49;
+      min-height: 20px;
+    }
+
+    .status-line.error {
+      color: #b3401d;
+    }
+
+    .results-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .place-card {
+      background: #ffffff;
+      border: 1px solid #ead7bd;
+      border-radius: 12px;
+      padding: 16px 18px;
+    }
+
+    .place-card-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .place-name {
+      margin: 0 0 4px;
+      font-size: 17px;
+      font-weight: 600;
+      color: #3a2513;
+    }
+
+    .place-address {
+      margin: 0;
+      font-size: 13px;
+      color: #6f5b49;
+      line-height: 1.5;
+    }
+
+    .place-rating {
+      white-space: nowrap;
+      font-size: 14px;
+      color: #b3401d;
+      font-weight: 600;
+    }
+
+    .place-actions {
+      margin-top: 12px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .place-actions a,
+    .place-actions button {
+      font-family: inherit;
+      font-size: 13px;
+      padding: 7px 14px;
+      border-radius: 999px;
+      border: 1px solid #3a2513;
+      background: #ffffff;
+      color: #3a2513;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .place-actions button:disabled {
+      opacity: 0.6;
+      cursor: default;
+    }
+
+    .place-details {
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px dashed #ead7bd;
+      font-size: 13px;
+      color: #4a3826;
+      line-height: 1.7;
+      display: none;
+    }
+
+    .place-details.is-open {
+      display: block;
+    }
+
+    .place-details dt {
+      font-weight: 600;
+      color: #3a2513;
+    }
+
+    .place-details dd {
+      margin: 0 0 8px;
+    }
+
+    .place-actions button.add-action {
+      background: #3a2513;
+      color: #ffffff;
+    }
+
+    .place-actions button.add-action.is-added {
+      background: #ffffff;
+      color: #6f5b49;
+      border-color: #ead7bd;
+    }
+
+    .add-form {
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px dashed #ead7bd;
+      display: none;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .add-form.is-open {
+      display: flex;
+    }
+
+    .add-form-row {
+      display: flex;
+      gap: 8px;
+    }
+
+    .add-form input {
+      flex: 1;
+      padding: 8px 10px;
+      border: 1px solid #ead7bd;
+      border-radius: 6px;
+      font-family: inherit;
+      font-size: 13px;
+    }
+
+    .add-form-hint {
+      font-size: 12px;
+      color: #6f5b49;
+      margin: 0;
+    }
+
+    .add-form-actions {
+      display: flex;
+      gap: 8px;
+    }
+
+    .add-form-actions button {
+      font-family: inherit;
+      font-size: 13px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      cursor: pointer;
+    }
+
+    .add-form-confirm {
+      border: 0;
+      background: #3a2513;
+      color: #ffffff;
+    }
+
+    .add-form-cancel {
+      border: 1px solid #ead7bd;
+      background: #ffffff;
+      color: #6f5b49;
+    }
+
+    .add-form-status {
+      font-size: 12px;
+      min-height: 16px;
+    }
+
+    .add-form-status.error {
+      color: #b3401d;
+    }
+
+    .empty-state {
+      color: #6f5b49;
+      font-size: 14px;
+      padding: 40px 0;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="admin-wrap">
+    <span class="admin-banner">內部測試工具・不對外開放</span>
+    <h1>Google Places 資料查詢</h1>
+    <p class="subtitle">
+      用來查真實店家資料（地址、評分、營業時間、Google Maps 連結），跟
+      <code>dessert_data_sample.json</code> 現有的樣本店對照。點「查看詳細資料」純查詢；
+      想收錄的店可以點「加入 SugarTopia」，補上分類跟標籤後存進資料庫，之後就會出現在
+      <code>/api/shops</code>、分類頁、店家詳情頁裡，跟其他真實店家一樣。
+    </p>
+
+    <div class="search-row">
+      <input
+        id="placesQueryInput"
+        type="text"
+        placeholder="例如：台北 貓咖、松山 抹茶甜點"
+        autocomplete="off"
+      />
+      <button id="placesSearchButton" type="button">搜尋</button>
+    </div>
+
+    <p id="statusLine" class="status-line"></p>
+
+    <div id="resultsList" class="results-list"></div>
+  </div>
+
+  <script>
+    (function () {
+      const cloudApiUrl = "https://sugartopia-backend-673387630043.asia-east1.run.app";
+      const localApiUrl = "http://127.0.0.1:8000";
+      const localHosts = ["localhost", "127.0.0.1", "::", "[::]", "::1", "[::1]", ""];
+      const isLocal = localHosts.includes(window.location.hostname);
+      const apiBaseUrl = isLocal ? localApiUrl : cloudApiUrl;
+
+      const input = document.getElementById("placesQueryInput");
+      const searchButton = document.getElementById("placesSearchButton");
+      const statusLine = document.getElementById("statusLine");
+      const resultsList = document.getElementById("resultsList");
+
+      // 記住已經抓過詳細資料的 place_id，避免同一家店重複打 API 浪費額度
+      const detailsCache = new Map();
+
+      function setStatus(text, isError) {
+        statusLine.textContent = text || "";
+        statusLine.classList.toggle("error", Boolean(isError));
+      }
+
+      function formatRating(place) {
+        if (typeof place.rating !== "number") {
+          return "尚無評分";
+        }
+        const count = typeof place.reviewCount === "number" ? place.reviewCount : 0;
+        return `★ ${place.rating.toFixed(1)}（${count} 則評論）`;
+      }
+
+      function buildPlaceCard(place) {
+        const card = document.createElement("div");
+        card.className = "place-card";
+
+        const head = document.createElement("div");
+        head.className = "place-card-head";
+
+        const left = document.createElement("div");
+        const name = document.createElement("p");
+        name.className = "place-name";
+        name.textContent = place.name || "（沒有名稱）";
+        const address = document.createElement("p");
+        address.className = "place-address";
+        address.textContent = place.address || "沒有地址資料";
+        left.appendChild(name);
+        left.appendChild(address);
+
+        const rating = document.createElement("span");
+        rating.className = "place-rating";
+        rating.textContent = formatRating(place);
+
+        head.appendChild(left);
+        head.appendChild(rating);
+
+        const actions = document.createElement("div");
+        actions.className = "place-actions";
+
+        const detailsButton = document.createElement("button");
+        detailsButton.type = "button";
+        detailsButton.textContent = "查看詳細資料";
+
+        const mapsLink = document.createElement("a");
+        mapsLink.textContent = "在 Google Maps 開啟";
+        mapsLink.href = place.googleMapsUrl || "#";
+        mapsLink.target = "_blank";
+        mapsLink.rel = "noopener noreferrer";
+
+        const addButton = document.createElement("button");
+        addButton.type = "button";
+        addButton.className = "add-action";
+        addButton.textContent = "加入 SugarTopia";
+
+        actions.appendChild(detailsButton);
+        actions.appendChild(mapsLink);
+        actions.appendChild(addButton);
+
+        const details = document.createElement("dl");
+        details.className = "place-details";
+
+        const addForm = buildAddForm(place, addButton);
+
+        card.appendChild(head);
+        card.appendChild(actions);
+        card.appendChild(details);
+        card.appendChild(addForm);
+
+        addButton.addEventListener("click", () => {
+          if (addButton.classList.contains("is-added")) {
+            return;
+          }
+          addForm.classList.toggle("is-open");
+        });
+
+        detailsButton.addEventListener("click", async () => {
+          const isOpen = details.classList.contains("is-open");
+          if (isOpen) {
+            details.classList.remove("is-open");
+            return;
+          }
+
+          if (detailsCache.has(place.placeId)) {
+            renderDetails(details, detailsCache.get(place.placeId));
+            details.classList.add("is-open");
+            return;
+          }
+
+          detailsButton.disabled = true;
+          detailsButton.textContent = "查詢中...";
+
+          try {
+            const response = await fetch(
+              `${apiBaseUrl}/api/google/places/${encodeURIComponent(place.placeId)}`
+            );
+            const data = await response.json();
+
+            if (!response.ok) {
+              renderDetailsError(details, data.detail || "查詢失敗，請稍後再試。");
+            } else {
+              detailsCache.set(place.placeId, data);
+              renderDetails(details, data);
+            }
+
+            details.classList.add("is-open");
+          } catch (error) {
+            renderDetailsError(details, "連不上後端，請確認 FastAPI 是否正在執行。");
+            details.classList.add("is-open");
+          } finally {
+            detailsButton.disabled = false;
+            detailsButton.textContent = "查看詳細資料";
+          }
+        });
+
+        return card;
+      }
+
+      function buildAddForm(place, addButton) {
+        const form = document.createElement("div");
+        form.className = "add-form";
+
+        const hint = document.createElement("p");
+        hint.className = "add-form-hint";
+        hint.textContent = "分類/標籤 Google 沒有提供，這邊自己補（標籤用逗號分隔）：";
+
+        const rowOne = document.createElement("div");
+        rowOne.className = "add-form-row";
+        const categoryInput = document.createElement("input");
+        categoryInput.placeholder = "分類（英文，例如 Cat Cafe）";
+        const categoryZhInput = document.createElement("input");
+        categoryZhInput.placeholder = "分類（中文，例如 貓咪咖啡廳）";
+        rowOne.appendChild(categoryInput);
+        rowOne.appendChild(categoryZhInput);
+
+        const rowTwo = document.createElement("div");
+        rowTwo.className = "add-form-row";
+        const tagsInput = document.createElement("input");
+        tagsInput.placeholder = "標籤（英文，例如 Cat Cafe, Quiet）";
+        const tagsZhInput = document.createElement("input");
+        tagsZhInput.placeholder = "標籤（中文，例如 貓咖, 安靜）";
+        rowTwo.appendChild(tagsInput);
+        rowTwo.appendChild(tagsZhInput);
+
+        const formActions = document.createElement("div");
+        formActions.className = "add-form-actions";
+        const confirmButton = document.createElement("button");
+        confirmButton.type = "button";
+        confirmButton.className = "add-form-confirm";
+        confirmButton.textContent = "確認加入";
+        const cancelButton = document.createElement("button");
+        cancelButton.type = "button";
+        cancelButton.className = "add-form-cancel";
+        cancelButton.textContent = "取消";
+        formActions.appendChild(confirmButton);
+        formActions.appendChild(cancelButton);
+
+        const formStatus = document.createElement("p");
+        formStatus.className = "add-form-status";
+
+        form.appendChild(hint);
+        form.appendChild(rowOne);
+        form.appendChild(rowTwo);
+        form.appendChild(formActions);
+        form.appendChild(formStatus);
+
+        cancelButton.addEventListener("click", () => {
+          form.classList.remove("is-open");
+          formStatus.textContent = "";
+        });
+
+        function splitTags(value) {
+          return value
+            .split(",")
+            .map((tag) => tag.trim())
+            .filter(Boolean);
+        }
+
+        confirmButton.addEventListener("click", async () => {
+          confirmButton.disabled = true;
+          confirmButton.textContent = "加入中...";
+          formStatus.textContent = "";
+          formStatus.classList.remove("error");
+
+          try {
+            const response = await fetch(`${apiBaseUrl}/api/shops/curated`, {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                place_id: place.placeId,
+                category: categoryInput.value.trim(),
+                category_zh: categoryZhInput.value.trim(),
+                tags: splitTags(tagsInput.value),
+                tags_zh: splitTags(tagsZhInput.value),
+              }),
+            });
+            const data = await response.json();
+
+            if (!response.ok) {
+              formStatus.textContent = data.detail || "加入失敗，請稍後再試。";
+              formStatus.classList.add("error");
+              return;
+            }
+
+            form.classList.remove("is-open");
+            addButton.classList.add("is-added");
+            addButton.textContent = "已加入 SugarTopia";
+          } catch (error) {
+            formStatus.textContent = "連不上後端，請確認 FastAPI 是否正在執行。";
+            formStatus.classList.add("error");
+          } finally {
+            confirmButton.disabled = false;
+            confirmButton.textContent = "確認加入";
+          }
+        });
+
+        return form;
+      }
+
+      function renderDetails(container, place) {
+        container.innerHTML = "";
+
+        const rows = [
+          ["電話", place.phone || "無資料"],
+          ["官網", place.website || "無資料"],
+          ["目前是否營業", place.openNow === true ? "營業中" : place.openNow === false ? "已打烊" : "無資料"],
+        ];
+
+        rows.forEach(([label, value]) => {
+          const dt = document.createElement("dt");
+          dt.textContent = label;
+          const dd = document.createElement("dd");
+          dd.textContent = value;
+          container.appendChild(dt);
+          container.appendChild(dd);
+        });
+
+        if (Array.isArray(place.weekdayDescriptions) && place.weekdayDescriptions.length > 0) {
+          const dt = document.createElement("dt");
+          dt.textContent = "營業時間";
+          const dd = document.createElement("dd");
+          dd.textContent = place.weekdayDescriptions.join("　");
+          container.appendChild(dt);
+          container.appendChild(dd);
+        }
+      }
+
+      function renderDetailsError(container, message) {
+        container.innerHTML = "";
+        const dd = document.createElement("dd");
+        dd.textContent = message;
+        container.appendChild(dd);
+      }
+
+      async function runSearch() {
+        const query = input.value.trim();
+        if (!query) {
+          setStatus("請先輸入想搜尋的關鍵字。", true);
+          return;
+        }
+
+        searchButton.disabled = true;
+        searchButton.textContent = "搜尋中...";
+        setStatus("查詢中，請稍候...");
+        resultsList.innerHTML = "";
+
+        try {
+          const response = await fetch(
+            `${apiBaseUrl}/api/google/places/search?q=${encodeURIComponent(query)}`
+          );
+          const data = await response.json();
+
+          if (!response.ok) {
+            setStatus(data.detail || "查詢失敗，請稍後再試。", true);
+            return;
+          }
+
+          if (!Array.isArray(data.places) || data.places.length === 0) {
+            setStatus("");
+            resultsList.innerHTML = '<p class="empty-state">沒有找到符合的店家，換個關鍵字試試看。</p>';
+            return;
+          }
+
+          setStatus(`找到 ${data.total} 筆結果。`);
+          data.places.forEach((place) => {
+            resultsList.appendChild(buildPlaceCard(place));
+          });
+        } catch (error) {
+          setStatus("連不上後端，請確認 FastAPI 是否正在執行（本機要先 uvicorn main:app --reload）。", true);
+        } finally {
+          searchButton.disabled = false;
+          searchButton.textContent = "搜尋";
+        }
+      }
+
+      searchButton.addEventListener("click", runSearch);
+      input.addEventListener("keydown", (event) => {
+        if (event.key === "Enter") {
+          runSearch();
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

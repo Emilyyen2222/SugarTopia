@@ -13,12 +13,33 @@ body {
   padding: 0;
 } */
 body {
-  font-family: poppins;
+  font-family: 'Poppins', sans-serif;
 }
 .swiper {
-  width: 40vw;
-  height: 70vh;
-  margin-top: 5rem;
+  /* 踩到的雷：Swiper 官方套件的 CSS（swiper-bundle.css）本來就幫 .swiper
+     設了 margin-left: auto; margin-right: auto;，這是設計給「一般區塊元素」
+     水平置中用的寫法。但這裡 .swiper 是 .split-section（display:flex）的
+     直接子元素，flexbox 會把 auto margin 重新解讀成「把多出來的空間吃掉、
+     元件縮小並置中」，於是寬度只有 40vw、遠小於它實際該佔的那一半欄寬，
+     兩側都露出背景色，寬螢幕下特別明顯（2560px 寬的螢幕，兩側各露出
+     128px 的空隙，而且左右不對稱、隨螢幕寬度變動）。
+
+     第一次修的時候把留白整個拿掉、改成貼滿整欄，這其實修過頭了——原本的
+     設計就是想讓圖片「浮」在色塊裡、四周留一點白邊，只是原本那組
+     margin: auto 因為上面提到的 flex 重新解讀，留白留得不穩定、不對稱。
+     真正該修的是「留白不穩定」，不是「留白本身」。這裡改成明確、四邊
+     對稱、不會因為螢幕寬度而跑掉的固定留白（40px），寬度／高度也一起
+     扣掉這圈留白，維持跟左欄對稱、不會超出或不足。 */
+  width: calc(50% - 80px);
+  /* 這裡試過 height: 100% 跟 align-self: stretch，兩種都讓整個頁面高度暴衝到
+     2000px 以上。原因是 Swiper.js 本身會在初始化時用 JavaScript 實際「量」
+     容器高度來設定內部 slide 的高度，如果當下容器沒有一個明確、穩定的
+     px 高度可以量（而是要等 flex 版面算完才知道），量到的數字會不穩定，
+     兩邊經由 flex 的高度互相依賴又會把這個誤差放大。解法是給 .swiper 一個
+     跟 .split-section 的高度算式相關、但不需要互相依賴的明確算式，
+     Swiper.js 一開始就量得到穩定數字。 */
+  height: calc(100vh - 160px);
+  margin: 40px;
   border-radius: 2rem;
 }
 
@@ -40,10 +61,16 @@ body {
 }
 
 @media (width <= 1024px){
+    /* 這個寬度下 .split-section 改成上下堆疊（見 style.css），.swiper 排在
+       最上面、.left-side（文字＋AI 問答）排在下面。桌機版讓圖片四周留白、
+       浮在色塊裡的「框裱」效果，在手機這種窄螢幕上留白反而顯得浪費空間、
+       不像刻意設計，改成貼齊螢幕左右邊緣的滿版圖片（常見的手機版 hero
+       處理方式），上下留一點呼吸空間就好，圓角也拿掉，滿版圖片配圓角在
+       螢幕邊緣會顯得不上不下。 */
     .swiper{
-        width: 80vw;
-        height: 70vh;
-        margin-top: 6rem;
-        border-radius: 2rem;
+        width: 100%;
+        height: 60vh;
+        margin: 0 0 24px;
+        border-radius: 0;
             }
 }

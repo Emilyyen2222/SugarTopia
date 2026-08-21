@@ -1,28 +1,35 @@
 html {
-    font-size: clamp(16px, 2vw, 3rem);
+    /* 跟 style.css 同一個理由：固定 16px，不要讓 1rem 隨視窗寬度浮動。 */
+    font-size: 16px;
 }
 
 body {
-    font-family: poppins;
+    font-family: 'Poppins', sans-serif;
 }
 .dessert-shops h1{
-    font-size: 0.7rem;
+    font-size: 1.25rem;
 }
 
 .shop-details h2{
-    font-size: 0.5rem;
+    font-size: 1.25rem;
 }
 .description {
-    font-size: 0.5rem; 
-    line-height: 1.2; 
-    color: #333; 
+    font-size: 0.9375rem;
+    line-height: 1.2;
+    color: #333;
 }
 .map-container {
     width: 400px;
     flex-shrink: 0;
     position: sticky;
     top: 100px;
-    height: calc(100vh - 120px);
+    /* 原本用 calc(100vh - 120px)，在很高的螢幕上（例如 2560x1600）
+       地圖會被撐到超過 1000px，結果變成明顯比旁邊結果列表（尤其是
+       Macaron、Alcohol Infused 這種只有 2 家店的分類）高出一大截，
+       看起來像地圖「凸出來」蓋到下面的頁尾。改成固定高度，不管
+       螢幕多高、結果多少筆，地圖大小都維持一致、比例正常。 */
+    height: 600px;
+    margin-bottom: 40px;
 }
 
 .map-container iframe {

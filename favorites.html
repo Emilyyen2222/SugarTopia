@@ -3,21 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sugar.Topia</title>
+    <title>My Favorites - Sugar.Topia</title>
     <link rel="stylesheet" href="CSS/style.css">
+    <link rel="stylesheet" href="CSS/category.css">
+    <link rel="stylesheet" href="CSS/favorites.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <script src="Js/button_up.js" defer></script>
-    <script src="Js/slider.js" defer></script>
     <script src="Js/site-enhancements.js" defer></script>
     <script src="Js/auth.js" defer></script>
+    <script src="Js/favorites.js" defer></script>
 </head>
 <body>
+
     <header class="header">
         <div class="header-container">
-            <!-- 左半邊導航選單 -->
             <nav class="nav-menu">
                 <div class="nav-categories">
                     <button type="button" class="nav-categories-toggle">
@@ -39,14 +40,12 @@
                 </div>
             </nav>
 
-            <!-- Logo 置中 -->
             <div class="logo-container">
                 <a href="index.html">
                     <img src="img/11211.svg" alt="Sugar.Topia">
                 </a>
             </div>
 
-            <!-- 右半邊操作區域 -->
             <div class="actions">
                 <a href="write_review.html">write a review</a>
                 <a href="https://www.instagram.com/cupertino.keki/" class="brand-name">
@@ -58,30 +57,27 @@
             </div>
         </div>
     </header>
-    
 
-
-
-
-<!-- footer -->
-<footer>
-    <div class="footer-content">
-        <p>Sugar.Topia @ 2024. All rights not reserved.</p>
-        <div class="footer-links">
-            <a href="#">About</a>
-            <a href="#">Service</a>
-            <a href="#">Business</a>
-        </div>
-        <div class="footer_social-icons">
-            <a href="#"><i class="fab fa-youtube"></i></a>
-            <a href="#"><i class="fab fa-facebook-f"></i></a>
-            <a href="#"><i class="fab fa-twitter"></i></a>
-            <a href="https://www.instagram.com/cupertino.keki/"><i class="fab fa-instagram"></i></a>
-            <a href="#"><i class="fab fa-linkedin-in"></i></a>
-        </div>
+    <div class="main-content">
+        <div class="favorites-page"></div>
     </div>
-</footer>
 
-
+    <footer>
+        <div class="footer-content">
+            <p>Sugar.Topia @ 2024. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="#">About</a>
+                <a href="#">Service</a>
+                <a href="#">Business</a>
+            </div>
+            <div class="footer_social-icons">
+                <a href="#"><i class="fab fa-youtube"></i></a>
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="https://www.instagram.com/cupertino.keki/"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>

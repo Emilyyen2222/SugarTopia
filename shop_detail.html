@@ -7,9 +7,13 @@
     <link rel="stylesheet" href="CSS/style.css">
     <link rel="stylesheet" href="CSS/shop_detail.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <script src="Js/site-data.js" defer></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="Js/site-enhancements.js" defer></script>
     <script src="Js/auth.js" defer></script>
+    <script src="Js/favorites.js" defer></script>
+    <script src="Js/reviews.js" defer></script>
 </head>
 <body>
     <!-- Header -->
@@ -17,11 +21,24 @@
         <div class="header-container">
             <!-- 左側選單 -->
             <nav class="nav-menu">
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="category.html">Categories</a></li>
-                    <li><a href="aboutus_sugartopia.html">About</a></li>
-                </ul>
+                <div class="nav-categories">
+                    <button type="button" class="nav-categories-toggle">
+                        Categories
+                        <svg class="nav-categories-caret" width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                    <div class="nav-categories-panel">
+                        <a href="category.html?q=Cinnamon%20Rolls">Cinnamon Rolls</a>
+                        <a href="category.html?q=Ice%20Creams">Ice Creams</a>
+                        <a href="category.html?q=Bagels">Bagels</a>
+                        <a href="category.html?q=Cheesecakes">Cheese Cakes</a>
+                        <a href="category.html?q=Macaron">Macaron</a>
+                        <a href="category.html?q=Cafes">Cafes</a>
+                        <a href="category.html?q=Dogs%20Friendly">Dog Friendly</a>
+                        <a href="category.html?q=Alcohol">Alcohol Infused</a>
+                    </div>
+                </div>
             </nav>
 
             <!-- Logo -->
@@ -33,8 +50,13 @@
 
             <!-- 右側按鈕 -->
             <div class="actions">
-                <a href="login.html" class="btn-login">Log in</a>
-                <a href="signup.html" class="btn-signup">Sign up</a>
+                <a href="write_review.html">write a review</a>
+                <a href="https://www.instagram.com/cupertino.keki/" class="brand-name">
+                    cupertino.keki
+                    <i class="fa-solid fa-arrow-up-right-from-square link-icon"></i>
+                </a>
+                <a href="login.html" class="btn-login">Log In</a>
+                <a href="signup.html" class="btn-signup">Sign Up</a>
             </div>
         </div>
     </header>
@@ -87,87 +109,11 @@
                 <i class="fas fa-share"></i>
                 Share
             </button>
-            <button class="action-btn save" data-demo-message="Saved to your demo list. Real save needs login backend.">
+            <button class="action-btn save">
                 <i class="far fa-bookmark"></i>
                 Save
             </button>
         </div>
-
-        <!-- 菜單區塊 -->
-        <section class="menu-section">
-            <h2>Menu</h2>
-            <h3>Popular desserts</h3>
-            <div class="menu-grid">
-                <div class="menu-item">
-                    <img src="img/nathan-dumlao-pJllO6r0pKo-unsplash.jpg" alt="Apple Walnut Cinnamon Rolls">
-                    <!-- <img src="https://picsum.photos/300/200?random=1" alt="Apple Walnut Cinnamon Rolls"> -->
-                    <div class="item-info">
-                        <h4>Apple Walnut Cinnamon Rolls</h4>
-                        <div class="photo-stats">
-                            <span>25 Photos</span>
-                            <span>21 Reviews</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="menu-item">
-                    <img src="img/natalia-gusakova-isjsR5XB3pA-unsplash.jpg" alt="Classic Cinnamon Rolls">
-                    <div class="item-info">
-                        <h4>Classic Cinnamon Rolls</h4>
-                        <div class="photo-stats">
-                            <span>18 Photos</span>
-                            <span>15 Reviews</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="menu-item">
-                    <img src="img/natasha-levai-YVsFV0E-CGo-unsplash.jpg" alt="Chocolate Cinnamon Rolls">
-                    <div class="item-info">
-                        <h4>Chocolate Cinnamon Rolls</h4>
-                        <div class="photo-stats">
-                            <span>22 Photos</span>
-                            <span>19 Reviews</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 店家氛圍照片 -->
-        <section class="vibe-section">
-            <h2>What's the vibe?</h2>
-            <div class="vibe-grid">
-                <div class="vibe-item">
-                    <img src="img/rens-d-6LTAljmu2cY-unsplash.jpg" alt="Inside">
-                    <div class="item-info">
-                        <h4>Inside</h4>
-                        <div class="photo-stats">
-                            <span>25 Photos</span>
-                            <span>21 Reviews</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="vibe-item">
-                    <img src="img/natalia-gusakova-isjsR5XB3pA-unsplash.jpg" alt="Outside">
-                    <div class="item-info">
-                        <h4>Outside</h4>
-                        <div class="photo-stats">
-                            <span>15 Photos</span>
-                            <span>12 Reviews</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="vibe-item">
-                    <img src="img/mae-mu-74HGrqRby2Q-unsplash.jpg" alt="Food">
-                    <div class="item-info">
-                        <h4>Food</h4>
-                        <div class="photo-stats">
-                            <span>30 Photos</span>
-                            <span>25 Reviews</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
 
         <!-- 評論區塊 -->
         <section class="reviews-section">
@@ -398,25 +344,6 @@
     </div>
 </footer>
 
-<!-- Initialize Swiper -->
-<script>
-    var swiper = new Swiper(".mySwiper", {
-      spaceBetween: 30,
-      centeredSlides: true,
-      autoplay: {
-        delay: 2500,
-        disableOnInteraction: false,
-      },
-      pagination: {
-        el: ".swiper-pagination",
-        clickable: true,
-      },
-      navigation: {
-        nextEl: ".swiper-button-next",
-        prevEl: ".swiper-button-prev",
-      },
-    });
-  </script>
 <!-- </div> -->
 </body>
 </html>

@@ -1,0 +1,11 @@
+<svg width="400" height="300" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+  <rect width="400" height="300" fill="#FFF3DE"/>
+  <g transform="translate(200,150)" fill="none" stroke="#F9A726" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+    <circle r="52" />
+    <circle cx="-18" cy="-14" r="6" fill="#F9A726" stroke="none" />
+    <circle cx="16" cy="-20" r="5" fill="#F9A726" stroke="none" />
+    <circle cx="6" cy="14" r="6" fill="#F9A726" stroke="none" />
+    <circle cx="-14" cy="20" r="5" fill="#F9A726" stroke="none" />
+  </g>
+  <text x="200" y="238" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="18" fill="#8a6f52">Photo coming soon</text>
+</svg>

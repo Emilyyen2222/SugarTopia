@@ -8,8 +8,10 @@
     <link rel="stylesheet" href="CSS/style.css">
     <link rel="stylesheet" href="CSS/category.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="Js/button_up.js" defer></script>
-    <script src="Js/site-data.js" defer></script>
     <script src="Js/site-enhancements.js" defer></script>
     <script src="Js/auth.js" defer></script>
     <!-- <script src="Js/slider.js" defer></script> -->
@@ -565,11 +567,13 @@
     </section>
 
     <div class="map-container">
-        <iframe 
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d57840.629545262926!2d121.5182723!3d25.0504032!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3442abb6da80a7ad%3A0xacc4d11dc963103c!2z5Y-w5YyX5biC!5e0!3m2!1szh-TW!2stw!4v1710425237071!5m2!1szh-TW!2stw" 
-            style="border:0;  height: 600px;" 
-            allowfullscreen="" 
-            loading="lazy" 
+        <p id="mapShowingLabel" class="map-showing-label"></p>
+        <iframe
+            id="shopMapEmbed"
+            src="https://www.google.com/maps?q=25.0504032,121.5182723&z=13&output=embed"
+            style="border:0;  height: 600px;"
+            allowfullscreen=""
+            loading="lazy"
             referrerpolicy="no-referrer-when-downgrade">
         </iframe>
     </div>

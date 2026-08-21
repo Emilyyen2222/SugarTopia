@@ -7,8 +7,10 @@
     <link rel="stylesheet" href="CSS/style.css">
     <link rel="stylesheet" href="CSS/write_review.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="Js/button_up.js" defer></script>
-    <script src="Js/site-data.js" defer></script>
     <script src="Js/site-enhancements.js" defer></script>
     <script src="Js/auth.js" defer></script>
     <!-- <script src="Js/slider.js" defer></script> -->
@@ -18,12 +20,24 @@
         <div class="header-container">
             <!-- 左半邊導航選單 -->
             <nav class="nav-menu">
-                <ul>
-                    <li><a href="category.html?q=Cinnamon%20Rolls">cinnamon Rolls</a></li>
-                    <li><a href="category.html?q=Cheesecakes">cheese cakes</a></li>
-                    <li><a href="category.html?q=Ice%20Creams">ice creams</a></li>
-                    <li><a href="category.html?q=Cafes">cafes</a></li>
-                </ul>
+                <div class="nav-categories">
+                    <button type="button" class="nav-categories-toggle">
+                        Categories
+                        <svg class="nav-categories-caret" width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                    <div class="nav-categories-panel">
+                        <a href="category.html?q=Cinnamon%20Rolls">Cinnamon Rolls</a>
+                        <a href="category.html?q=Ice%20Creams">Ice Creams</a>
+                        <a href="category.html?q=Bagels">Bagels</a>
+                        <a href="category.html?q=Cheesecakes">Cheese Cakes</a>
+                        <a href="category.html?q=Macaron">Macaron</a>
+                        <a href="category.html?q=Cafes">Cafes</a>
+                        <a href="category.html?q=Dogs%20Friendly">Dog Friendly</a>
+                        <a href="category.html?q=Alcohol">Alcohol Infused</a>
+                    </div>
+                </div>
             </nav>
 
             <!-- Logo 置中 -->

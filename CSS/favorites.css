@@ -1,0 +1,13 @@
+/* 收藏頁面 favorites.html 專用樣式。
+   .shop-item / .shop-results / .empty-state / .result-count 這些卡片樣式都共用
+   style.css 裡本來就有的規則，不用重複寫。這裡只補容器本身的版面。
+
+   容器故意不叫 .dessert-shops：site-enhancements.js 的 renderShopList() 是用
+   document.querySelector(".dessert-shops") 抓分類頁的容器來自動渲染店家列表，
+   如果這裡沿用同一個 class，會被 renderShopList() 誤認成分類頁、把這裡的收藏內容蓋掉。
+   用 .favorites-page 這個獨立的名字，同時把 .dessert-shops 原本的版面（flex item、
+   無最小寬度限制）搬過來，視覺上維持一致。 */
+.favorites-page {
+  flex: 1;
+  min-width: 0;
+}

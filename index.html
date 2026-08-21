@@ -12,12 +12,15 @@
     <link rel="stylesheet" href="CSS/swiper2.css">
     <!-- <link rel="stylesheet" href="CSS/try.css"> -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="Js/button_up.js" defer></script>
     <!-- <script src="Js/slider.js" defer></script> -->
     <script src="Js/hamburger.js" defer></script>
-    <script src="Js/site-data.js" defer></script>
     <script src="Js/site-enhancements.js" defer></script>
     <script src="Js/auth.js" defer></script>
+    <script src="Js/reviews.js" defer></script>
     <script src="Js/gemini-chat.js" defer></script>
      <!-- <script src="Js/hamburger2.js"></script> -->
     <script src="Js/swiper-bundle.js"></script>
@@ -34,27 +37,66 @@
 
     <header class="header">
         <div class="header-container">
-            <nav class="nav-menu">
+            <!-- header-left 把「搜尋欄、Categories 選單、漢堡按鈕」包成同一個
+                 flex item，理由是 .header-container 本身用 justify-content:
+                 space-between 只認兩大塊（左邊 / 右邊 actions），logo 又用
+                 position: fixed 卡在正中間。如果讓搜尋欄變成第三個各自獨立
+                 的 flex item，space-between 會把它們均分開來，Categories
+                 選單反而會被推向中間、離搜尋欄很遠、甚至逼近 logo。包成一組
+                 才能讓搜尋欄穩定貼著 Categories／漢堡按鈕左邊，整體仍然只算
+                 一塊。 -->
+            <div class="header-left">
+                <!-- 漢堡按鈕放最前面（窄螢幕時顯示，取代 Categories 選單），
+                     搜尋欄固定顯示在它右邊——窄螢幕時視覺順序是「漢堡、搜尋」。
+                     搜尋欄本身不會再跟著收進漢堡選單裡，點開漢堡不會再看到
+                     重複的搜尋欄。 -->
+                <div id="mobile-menu" class="menu-toggle" >
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+
                 <div class="search-bar">
                     <input type="text" placeholder="Search Dessert Shops">
                     <button class="search-btn">
                         <i class="fas fa-search"></i>
                     </button>
                 </div>
-                <ul>
-                        <li><a href="category.html?q=Cinnamon%20Rolls">cinnamon rolls</a></li>
-                        <li><a href="category.html?q=Cheesecakes">cheese cakes</a></li>
-                        <li><a href="category.html?q=Ice%20Creams">ice creams</a></li>
-                        <li><a href="category.html?q=Cafes">cafes</a></li>
-                        <li><a href="write_review.html">write a review</a></li>
-                        <li>
-                            <a href="https://www.instagram.com/cupertino.keki/" class="brand-name"target="_blank">
-                                cupertino.keki
-                                <i class="fa-solid fa-arrow-up-right-from-square link-icon"></i>
-                            </a>
-                        </li>
-                </ul>
-            </nav>
+
+                <nav class="nav-menu">
+                    <div class="nav-categories">
+                        <button type="button" class="nav-categories-toggle">
+                            Categories
+                            <svg class="nav-categories-caret" width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                        <div class="nav-categories-panel">
+                            <a href="category.html?q=Cinnamon%20Rolls">Cinnamon Rolls</a>
+                            <a href="category.html?q=Ice%20Creams">Ice Creams</a>
+                            <a href="category.html?q=Bagels">Bagels</a>
+                            <a href="category.html?q=Cheesecakes">Cheese Cakes</a>
+                            <a href="category.html?q=Macaron">Macaron</a>
+                            <a href="category.html?q=Cafes">Cafes</a>
+                            <a href="category.html?q=Dogs%20Friendly">Dog Friendly</a>
+                            <a href="category.html?q=Alcohol">Alcohol Infused</a>
+                        </div>
+                    </div>
+
+                    <!-- 手機版才會顯示的連結，跟 .actions 裡的同一個連結是重複的兩份
+                         靜態連結（沒有登入狀態這種動態內容，複製起來不會有同步問題）。
+                         桌機寬度用 CSS 隱藏這裡、顯示 .actions 那份；窄螢幕相反，這樣
+                         窄螢幕才不用在 header 本體塞下 write a review／cupertino.keki
+                         這兩個次要連結，全部收進漢堡選單裡。 -->
+                    <div class="nav-menu-mobile-links">
+                        <a href="write_review.html">write a review</a>
+                        <a href="https://www.instagram.com/cupertino.keki/" target="_blank">
+                            cupertino.keki
+                            <i class="fa-solid fa-arrow-up-right-from-square link-icon"></i>
+                        </a>
+                    </div>
+                </nav>
+            </div>
 
             <div class="logo-container">
                 <a href="index.html">
@@ -62,17 +104,12 @@
                 </a>
             </div>
 
-<!---------------------------- hamburger ----------------------------- -->
- <!-- 漢堡按鈕 -->
- <!-- <div id="mobile-menu" class="hamburger-menu">☰</div> -->
-<!-- old class = menu-toggle -->
-            <div id="mobile-menu" class="menu-toggle" >
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </div>
-
             <div class="actions">
+                <a href="write_review.html" class="actions-write-review">write a review</a>
+                <a href="https://www.instagram.com/cupertino.keki/" class="brand-name" target="_blank">
+                    cupertino.keki
+                    <i class="fa-solid fa-arrow-up-right-from-square link-icon"></i>
+                </a>
                 <a href="login.html" class="btn-login">Log In</a>
                 <a href="signup.html" class="btn-signup">Sign Up</a>
                 <button class="login_avatar" onclick="location.href='login.html';">
@@ -86,19 +123,29 @@
     <section class="split-section">
         <div class="left-side">
             <p class="overlay-text">Let’s Make Life Sweet, One Dessert at a Time.</p>
-            <div class="search-bar">
-                <input type="text" placeholder="Search Dessert Shops">
-                <input type="text" placeholder="Songshan, Taipei">
-                <button class="search-btn">
-                    <i class="fas fa-search"></i>
+
+            <div class="ai-chat-heading">
+                <span>SugarTopia AI</span>
+                <h2>Ask for a dessert recommendation</h2>
+                <!-- <p>Tell us what kind of dessert, flavor, location, or mood you want today.</p> -->
+            </div>
+
+            <div id="chatMessages" class="chat-messages" aria-live="polite">
+                <div class="chat-message assistant">Hi! Tell me what dessert you want today, and I will recommend a sweet spot from our SugarTopia notes.</div>
+            </div>
+
+            <form id="chatForm" class="chat-form">
+                <input
+                    id="chatInput"
+                    type="text"
+                    placeholder="e.g. Matcha dessert recommendations?"
+                    autocomplete="off"
+                />
+                <button type="submit">
+                    Send
+                    <i class="fas fa-paper-plane"></i>
                 </button>
-            </div>
-            <div class="social-icons">
-                <a href="https://www.instagram.com/cupertino.keki/"target="_blank"><i class="fab fa-instagram" ></i></a>
-                <a href="https://www.youtube.com/" target="_blank"><i class="fab fa-youtube"></i></a>
-                <a href="write_review.html"><i class="fa-regular fa-star"></i></a>
-                <a href="aboutus_sugartopia.html"><img src='./img/icon.svg' alt="Sugar.Topia Logo"></a>
-            </div>
+            </form>
         </div>
          <!-- Swiper -->
         <div class="swiper mySwiper">
@@ -142,39 +189,10 @@
         </div> -->
     </section>
 
-<!-- AI chat ------------------------------------------------------>
-<section class="ai-chat-section">
-    <div class="ai-chat-container">
-        <div class="ai-chat-heading">
-            <span>SugarTopia AI</span>
-            <h2>Ask for a dessert recommendation</h2>
-            <p>Tell us what kind of dessert, flavor, location, or mood you want today.</p>
-        </div>
-
-        <div id="chatMessages" class="chat-messages" aria-live="polite">
-            <div class="chat-message assistant">Hi! Tell me what dessert you want today, and I will recommend a sweet spot from our SugarTopia notes.</div>
-        </div>
-
-        <form id="chatForm" class="chat-form">
-            <input
-                id="chatInput"
-                type="text"
-                placeholder="例如：我想吃抹茶甜點，有推薦嗎？"
-                autocomplete="off"
-            />
-            <button type="submit">
-                Send
-                <i class="fas fa-paper-plane"></i>
-            </button>
-        </form>
-    </div>
-</section>
-
 <!-- latest reviews ---------------------------------------------->
 <div class="latest_review_section">
     <div class="review-header">
         <h1>Latest Reviews</h1>
-        <a href="review.html" class="review-view-all">View All</a>
     </div>
     <div class="review-grid">
         <div class="review-card">
@@ -352,43 +370,43 @@
     </div>
     <div class="category-grid">
         <div class="category-card">
-            <a href="category.html">
+            <a href="category.html?q=Cinnamon%20Rolls">
                 <img src="./img/c1.svg" alt="Cinnamon Rolls">
             </a>
         </div>
         <div class="category-card">
-            <a href="category.html">
-                <img src="./img/c2.svg" alt="Cinnamon Rolls">
+            <a href="category.html?q=Ice%20Creams">
+                <img src="./img/c2.svg" alt="Ice Creams">
             </a>
         </div>
         <div class="category-card">
-            <a href="category.html">
-                <img src="./img/c3.svg" alt="Ice Creams">
+            <a href="category.html?q=Bagels">
+                <img src="./img/c3.svg" alt="Bagels">
             </a>
         </div>
         <div class="category-card">
-            <a href="category.html">
-                <img src="./img/c4.svg" alt="Ice Creams">
+            <a href="category.html?q=Cheesecakes">
+                <img src="./img/c4.svg" alt="Cheese Cakes">
             </a>
         </div>
         <div class="category-card">
-            <a href="category.html">
-                <img src="./img/c5.svg" alt="Cinnamon Rolls">
+            <a href="category.html?q=Macaron">
+                <img src="./img/c5.svg" alt="Macaron">
             </a>
         </div>
         <div class="category-card">
-            <a href="category.html">
-                <img src="./img/c6.svg" alt="Ice Creams">
+            <a href="category.html?q=Cafes">
+                <img src="./img/c6.svg" alt="Cafes">
             </a>
         </div>
         <div class="category-card">
-            <a href="category.html">
-                <img src="./img/c7.svg" alt="Cinnamon Rolls">
+            <a href="category.html?q=Dogs%20Friendly">
+                <img src="./img/c7.svg" alt="Dog Friendly">
             </a>
         </div>
         <div class="category-card">
-            <a href="category.html">
-                <img src="./img/c8.svg" alt="Ice Creams">
+            <a href="category.html?q=Alcohol">
+                <img src="./img/c8.svg" alt="Alcohol infused">
             </a>
         </div>
     </div>

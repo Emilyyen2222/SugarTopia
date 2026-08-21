@@ -73,11 +73,19 @@
   }
 
   function updateHeader(user) {
-    document.querySelectorAll(".actions").forEach((actions) => {
+    document.querySelectorAll(".header-container").forEach((container) => {
+      const actions = container.querySelector(".actions");
+
+      if (!actions) {
+        return;
+      }
+
+      const navMenu = container.querySelector(".nav-menu");
       const loginLink = actions.querySelector(".btn-login");
       const signupLink = actions.querySelector(".btn-signup");
       const avatarButton = actions.querySelector(".login_avatar");
       let userBadge = actions.querySelector(".auth-user");
+      let favoritesLink = navMenu?.querySelector(".auth-favorites");
       let logoutButton = actions.querySelector(".auth-logout");
 
       if (user) {
@@ -89,6 +97,16 @@
           userBadge = document.createElement("span");
           userBadge.className = "auth-user";
           actions.appendChild(userBadge);
+        }
+
+        // My Favorites 放在 nav-menu 裡、跟 Categories 並排，不是右側 actions——
+        // 這樣已登入的人右側才不會一次塞太多項目、擠到中間的 logo。
+        if (navMenu && !favoritesLink) {
+          favoritesLink = document.createElement("a");
+          favoritesLink.className = "auth-favorites";
+          favoritesLink.href = "favorites.html";
+          favoritesLink.textContent = "My Favorites";
+          navMenu.appendChild(favoritesLink);
         }
 
         if (!logoutButton) {
@@ -105,6 +123,7 @@
         signupLink?.classList.remove("is-hidden");
         avatarButton?.classList.remove("is-hidden");
         userBadge?.remove();
+        favoritesLink?.remove();
         logoutButton?.remove();
       }
     });
@@ -227,6 +246,14 @@
     setupLoginForm();
     setupSignupForm();
     setupLogout();
-    updateHeader(await refreshCurrentUser());
+
+    const user = await refreshCurrentUser();
+    updateHeader(user);
+
+    const authForm = document.querySelector("[data-auth-form='login'], [data-auth-form='signup']");
+    if (user && authForm) {
+      showMessage(`You're already logged in as ${user.name}.`);
+      window.location.href = "index.html";
+    }
   });
 })();

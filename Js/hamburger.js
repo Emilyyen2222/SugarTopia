@@ -13,7 +13,29 @@ window.addEventListener('resize', function() {
 });
 
 // 添加事件監聽器到漢堡選單
-document.getElementById('mobile-menu').addEventListener('click', toggleMenu);
+document.getElementById('mobile-menu').addEventListener('click', function (event) {
+    event.stopPropagation(); // 避免這次點擊立刻被下面「點外面關閉」的邏輯抓到，剛打開又馬上關掉
+    toggleMenu();
+});
+
+// 點選單外面要收起來，跟 Categories 下拉選單（見 site-enhancements.js 的
+// setupCategoriesMenu()）用同一套邏輯，保持全站行為一致。
+document.addEventListener('click', function (event) {
+    const menu = document.querySelector('.nav-menu');
+    if (menu && menu.classList.contains('active') && !menu.contains(event.target)) {
+        menu.classList.remove('active');
+    }
+});
+
+// 按 Escape 也要收起來。
+document.addEventListener('keydown', function (event) {
+    if (event.key === 'Escape') {
+        const menu = document.querySelector('.nav-menu');
+        if (menu) {
+            menu.classList.remove('active');
+        }
+    }
+});
 
 
 
